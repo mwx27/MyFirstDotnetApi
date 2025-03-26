@@ -1,6 +1,39 @@
 @MyFirstDotnetApi_HostAddress = http://localhost:5012
 
+### Health check
 GET {{MyFirstDotnetApi_HostAddress}}/ping
 Accept: application/json
 
-###
+### GET users
+GET http://localhost:5012/users
+Accept: application/json
+
+### POST user
+POST http://localhost:5012/users
+Content-Type: application/json
+
+{
+  "firstName": "Alice",
+  "lastName": "Johnson",
+  "email": "alice@example.com",
+  "phoneNumber": "+123456789"
+}
+
+### GET user by id
+GET http://localhost:5012/users/c21fedc6-0207-4889-8c87-bfbd54f87494
+Accept: application/json
+
+### DELETE user by id
+PUT http://localhost:5012/users/c21fedc6-0207-4889-8c87-bfbd54f87494
+Content-Type: application/json
+
+{
+  "firstName": "Bob",
+  "lastName": "Smith",
+  "email": "bob@example.com",
+  "phoneNumber": "+1987654321"
+}
+
+### DELETE user by id
+DELETE http://localhost:5012/users/c21fedc6-0207-4889-8c87-bfbd54f87494
+Accept: application/json
