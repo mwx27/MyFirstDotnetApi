@@ -37,3 +37,15 @@ Content-Type: application/json
 ### DELETE user by id
 DELETE http://localhost:5012/users/c21fedc6-0207-4889-8c87-bfbd54f87494
 Accept: application/json
+
+### New user registration
+POST http://localhost:5012/auth/register
+Content-Type: application/json
+
+{
+  "firstName": "Bob",
+  "lastName": "Smith",
+  "email": "bob@example.com",
+  "phoneNumber": "+1987654321",
+  "password": "qwerty"
+}

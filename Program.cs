@@ -1,4 +1,5 @@
 using MyFirstDotnetApi.Models;
+using MyFirstDotnetApi.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi();
 
 var users = new List<User>();
+var registeredUsers = new List<RegisteredUser>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -78,5 +81,27 @@ app.MapDelete("/users/{id}", (string id) =>
     return Results.NoContent();
 })
 .WithName("DeleteUser");
+
+app.MapPost("/auth/register", (RegisterRequest request) =>
+{
+    var exists = registeredUsers.Any(u => u.Email == request.Email);
+    if (exists) return Results.BadRequest(new { message = "User with this email already exists" });
+
+    var hashedPassword = PasswordHelper.HashPassword(request.Password);
+
+    var newUser = new RegisteredUser(
+        UserId: Guid.NewGuid().ToString(),
+        FirstName: request.FirstName,
+        LastName: request.LastName,
+        Email: request.Email,
+        PhoneNumber: request.PhoneNumber,
+        PasswordHash: hashedPassword,
+        CreatedAt: DateTime.UtcNow
+    );
+
+    registeredUsers.Add(newUser);
+
+    return Results.Created("/auth/register", new { newUser.UserId, message = "User registered successfully" });
+});
 
 app.Run();
