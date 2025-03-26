@@ -1,6 +1,6 @@
 @MyFirstDotnetApi_HostAddress = http://localhost:5012
 
-GET {{MyFirstDotnetApi_HostAddress}}/weatherforecast/
+GET {{MyFirstDotnetApi_HostAddress}}/ping
 Accept: application/json
 
 ###
