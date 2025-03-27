@@ -49,3 +49,12 @@ Content-Type: application/json
   "phoneNumber": "+1987654321",
   "password": "qwerty"
 }
+
+### User login
+POST http://localhost:5012/auth/login
+Content-Type: application/json
+
+{
+  "email": "bob@example.com",
+  "password": "qwerty"
+}

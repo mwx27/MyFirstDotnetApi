@@ -104,4 +104,23 @@ app.MapPost("/auth/register", (RegisterRequest request) =>
     return Results.Created("/auth/register", new { newUser.UserId, message = "User registered successfully" });
 });
 
+app.MapPost("/auth/login", (LoginRequest request, IConfiguration config) =>
+{
+    var user = registeredUsers.FirstOrDefault(u =>
+        u.Email == request.Email &&
+        u.PasswordHash == PasswordHelper.HashPassword(request.Password)
+    );
+
+    if (user is null) return Results.Unauthorized();
+
+    var token = JwtHelper.GenerateToken(user.UserId, config);
+
+    return Results.Ok(new
+    {
+        token,
+        userId = user.UserId,
+        expiresAt = DateTime.UtcNow.AddMinutes(int.Parse(config["Jwt:ExpiresInMinutes"]!))
+    });
+});
+
 app.Run();
