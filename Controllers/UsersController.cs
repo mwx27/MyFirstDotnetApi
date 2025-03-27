@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyFirstDotnetApi.Models;
+using System.Security.Claims;
 
 namespace MyFirstDotnetApi.Controllers;
 
@@ -71,6 +72,21 @@ public class UsersController(List<User> users) : ControllerBase
 
         _users.Remove(user);
         return NoContent();
+    }
+
+    [HttpGet("me")]
+    [Authorize]
+    public IActionResult GetCurrentUser()
+    {
+        var claim = User.FindFirst(ClaimTypes.NameIdentifier);
+        if (claim is null) return Unauthorized(new { message = "Invalid or missing token." });
+
+        var userId = claim.Value;
+        var user = _users.FirstOrDefault(u => u.UserId == userId);
+
+        if (user is null) return NotFound(new { message = "User not found" });
+
+        return Ok(user);
     }
 
 
