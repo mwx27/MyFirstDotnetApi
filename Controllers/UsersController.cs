@@ -8,14 +8,15 @@ namespace MyFirstDotnetApi.Controllers;
 [Route("[controller]")]
 [Authorize]
 
-public class UsersController : ControllerBase
+public class UsersController(List<User> users) : ControllerBase
 {
-    private static readonly List<User> users = new();
+
+    private readonly List<User> _users = users;
 
     [HttpGet]
     public IActionResult GetAllUsers()
     {
-        return Ok(users);
+        return Ok(_users);
     }
 
     [HttpPost]
@@ -31,21 +32,21 @@ public class UsersController : ControllerBase
             CreatedAt: DateTime.UtcNow
         );
 
-        users.Add(user);
+        _users.Add(user);
         return Created($"/users/{user.UserId}", user);
     }
 
     [HttpGet("{id}")]
     public IActionResult GetById(string id)
     {
-        var user = users.FirstOrDefault(u => u.UserId == id);
+        var user = _users.FirstOrDefault(u => u.UserId == id);
         return user is null ? NotFound(new { message = "User not found" }) : Ok(user);
     }
 
     [HttpPut("{id}")]
     public IActionResult Update(string id, UserRequest updatedData)
     {
-        var user = users.FirstOrDefault(u => u.UserId == id);
+        var user = _users.FirstOrDefault(u => u.UserId == id);
         if (user is null) return NotFound(new { message = "User not found" });
 
         var updatedUser = user with
@@ -56,8 +57,8 @@ public class UsersController : ControllerBase
             PhoneNumber = updatedData.PhoneNumber
         };
 
-        users.Remove(user);
-        users.Add(updatedUser);
+        _users.Remove(user);
+        _users.Add(updatedUser);
 
         return Ok(updatedUser);
     }
@@ -65,10 +66,10 @@ public class UsersController : ControllerBase
     [HttpDelete("{id}")]
     public IActionResult Delete(string id)
     {
-        var user = users.FirstOrDefault(u => u.UserId == id);
+        var user = _users.FirstOrDefault(u => u.UserId == id);
         if (user is null) return NotFound(new { message = "User not found" });
 
-        users.Remove(user);
+        _users.Remove(user);
         return NoContent();
     }
 
