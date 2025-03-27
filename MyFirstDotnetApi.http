@@ -6,6 +6,7 @@ Accept: application/json
 
 ### GET users
 GET http://localhost:5012/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyYTcwZGE0ZS0yY2RiLTQwMDctOWYyMC03NmFhNTkwZmFlMTkiLCJqdGkiOiI0YzQ4OGU3MC00MDc2LTQ5YmYtYWZjMi0xNzAxOTcxNmE5MWUiLCJleHAiOjE3NDMwNzM2MzcsImlzcyI6Ik15Rmlyc3REb3RuZXRBcGkiLCJhdWQiOiJNeUZpcnN0RG90bmV0QXBpVXNlcnMifQ.UHVQQh4HQOtpAHWMI1r0FVET88_cO591uQ68x8iRBd4
 Accept: application/json
 
 ### POST user
