@@ -1,6 +1,6 @@
 namespace MyFirstDotnetApi.Models;
 
-record User(
+public record User(
     string UserId,
     string FirstName,
     string LastName,

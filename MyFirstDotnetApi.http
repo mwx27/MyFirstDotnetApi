@@ -22,6 +22,7 @@ Content-Type: application/json
 
 ### GET user by id
 GET http://localhost:5012/users/c21fedc6-0207-4889-8c87-bfbd54f87494
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxZTM1YmZiNy1kZDFkLTRjYmMtODUwNS05MTkyZGMzMjY4NGQiLCJqdGkiOiI4YTM5ZTY1Ny1kOGU5LTRiZjEtYTE1NS1mOGY1ZWIxYmY2NmYiLCJleHAiOjE3NDMwNzU5NDksImlzcyI6Ik15Rmlyc3REb3RuZXRBcGkiLCJhdWQiOiJNeUZpcnN0RG90bmV0QXBpVXNlcnMifQ.IiaNe47uHVQxOY7-cg1afg_M7SURIBdbP82nSK4NIjk
 Accept: application/json
 
 ### DELETE user by id
