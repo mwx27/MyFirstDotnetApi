@@ -1,6 +1,67 @@
 @MyFirstDotnetApi_HostAddress = http://localhost:5012
 
+### Health check
 GET {{MyFirstDotnetApi_HostAddress}}/ping
 Accept: application/json
 
-###
+### GET users
+GET http://localhost:5012/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjNzZmYTdkNi00MmQ3LTRkOWEtYjcxNi03MzU1NTFiODk5MTIiLCJqdGkiOiI5ZTUwYzcxYS1lNzA5LTQ3MzctYjNmMi1lYmUzN2ViZWE5ODgiLCJleHAiOjE3NDMwOTYxMjUsImlzcyI6Ik15Rmlyc3REb3RuZXRBcGkiLCJhdWQiOiJNeUZpcnN0RG90bmV0QXBpVXNlcnMifQ.hPneB3rYwPTxKwsZhKy9royMulUj8W78UTUC91J_g5g
+Accept: application/json
+
+### POST user
+POST http://localhost:5012/users
+Content-Type: application/json
+
+{
+  "firstName": "Alice",
+  "lastName": "Johnson",
+  "email": "alice@example.com",
+  "phoneNumber": "+123456789"
+}
+
+### GET user by id
+GET http://localhost:5012/users/c21fedc6-0207-4889-8c87-bfbd54f87494
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjNzZmYTdkNi00MmQ3LTRkOWEtYjcxNi03MzU1NTFiODk5MTIiLCJqdGkiOiI5ZTUwYzcxYS1lNzA5LTQ3MzctYjNmMi1lYmUzN2ViZWE5ODgiLCJleHAiOjE3NDMwOTYxMjUsImlzcyI6Ik15Rmlyc3REb3RuZXRBcGkiLCJhdWQiOiJNeUZpcnN0RG90bmV0QXBpVXNlcnMifQ.hPneB3rYwPTxKwsZhKy9royMulUj8W78UTUC91J_g5g
+Accept: application/json
+
+### Update user by id
+PUT http://localhost:5012/users/c21fedc6-0207-4889-8c87-bfbd54f87494
+Content-Type: application/json
+
+{
+  "firstName": "Bob",
+  "lastName": "Smith",
+  "email": "bob@example.com",
+  "phoneNumber": "+1987654321"
+}
+
+### DELETE user by id
+DELETE http://localhost:5012/users/c21fedc6-0207-4889-8c87-bfbd54f87494
+Accept: application/json
+
+### New user registration
+POST http://localhost:5012/auth/register
+Content-Type: application/json
+
+{
+  "firstName": "Bob",
+  "lastName": "Smith",
+  "email": "bob@example.com",
+  "phoneNumber": "+1987654321",
+  "password": "qwerty"
+}
+
+### User login
+POST http://localhost:5012/auth/login
+Content-Type: application/json
+
+{
+  "email": "bob@example.com",
+  "password": "qwerty"
+}
+
+### GET current user
+GET http://localhost:5012/users/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1NmVjZjJmNC0xZjk5LTRmYzYtYjQwMi03M2Q1YzdlNjIxNzciLCJqdGkiOiIxODYyMjRhOC1iNzM4LTQ0ZDctOTJjYy03MDA0NDI0ZjcyYTAiLCJleHAiOjE3NDMwOTY3MjcsImlzcyI6Ik15Rmlyc3REb3RuZXRBcGkiLCJhdWQiOiJNeUZpcnN0RG90bmV0QXBpVXNlcnMifQ.sNHpX4IsEeFfAqgPX3mi84cHNSfKuyyJsHqcCAJ6ql0
+Accept: application/json
